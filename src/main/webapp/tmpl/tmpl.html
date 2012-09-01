@@ -11,7 +11,7 @@
 	<script id="sprints-template" type="text/x-handlebars-template">
 		<div class="DashboardStory">
 	        <div class="header">
-	          <div class="storyID red">{{weeks}}</div>
+	          <div class="deletesprint storyID red">{{weeks}}</div>
 	          <div class="nameContainer"><a class="name" href="#sprint/{{_id}}">{{name}}</a></div>
 	          <div class="LabeledCounts tasks">
 		         <div href="#" class="label">TASKS</div>
@@ -36,10 +36,9 @@
 	<script id="create-template" type="text/x-handlebars-template">
 		<div id="create" class="DashboardStory">
 	        <div class="header">
-	          <div class="storyID red">New</div>
+	          <div id="newsprint" class="storyID red">New</div>
 	          <div class="nameContainer">
 	          	<input type="text" placeholder="name"/>
-	          	<a>create</a>
 	          </div>
 	      </div>
        </div>

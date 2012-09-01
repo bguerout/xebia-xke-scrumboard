@@ -4,10 +4,11 @@ define(['text!/tmpl/tmpl.html'], function (tmpl) {
         template: Handlebars.compile($(tmpl).find('#sprints-template').html()),
         createTemplate: Handlebars.compile($(tmpl).find('#create-template').html()),
         events: {
-            'click a': 'create'
+            'click #newsprint': 'create',
+            'click .deletesprint': 'delete'
         },
     	initialize: function() {
-    		this.collection.on('reset sync', this.render, this);
+    		this.collection.on('reset sync remove', this.render, this);
     	},
     	render: function() {
             this.$el.empty();
@@ -22,6 +23,17 @@ define(['text!/tmpl/tmpl.html'], function (tmpl) {
         create: function() {
             var name = this.$el.find('input[type=text]').val();
             this.collection.create({name:name});
+        },
+        delete: function(event) {
+            var story = $(event.target).closest('.DashboardStory');
+            
+            var view = this;
+            $(story.parent().children()).each(function(index, item) {
+                if($(item)[0] == story[0]) {
+                    var model = view.collection.at(index);
+                    model.destroy({wait: true});
+                }
+            });
         }
     })
 });
