@@ -4,6 +4,7 @@ import static com.sun.jersey.api.core.ResourceConfig.PROPERTY_CONTAINER_REQUEST_
 import static com.sun.jersey.api.core.ResourceConfig.PROPERTY_CONTAINER_RESPONSE_FILTERS;
 
 import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.StaticHttpHandler;
 
 import com.sun.jersey.api.container.filter.LoggingFilter;
 import com.sun.jersey.api.container.grizzly2.GrizzlyServerFactory;
@@ -18,6 +19,7 @@ public class GrizzlyServer extends Server {
     protected void before() throws Throwable {
         ResourceConfig rc = newConfig();
         server = GrizzlyServerFactory.createHttpServer(uri, rc);
+        server.getServerConfiguration().addHttpHandler(new StaticHttpHandler("src/main/webapp"), "/");
     }
 
     private ResourceConfig newConfig() {

@@ -25,6 +25,7 @@
 		<jongo.version>0.2</jongo.version>
 		<mongo.version>2.8.0</mongo.version>
 		<jersey.version>1.13</jersey.version>
+		<jetty.version>8.1.5.v20120716</jetty.version>
 	</properties>
 
 	<dependencies>
@@ -49,11 +50,6 @@
 			<version>2.0.4</version>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-grizzly2</artifactId>
-			<version>${jersey.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.jongo</groupId>
 			<artifactId>jongo</artifactId>
 			<version>${jongo.version}</version>
@@ -67,6 +63,23 @@
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-client</artifactId>
 			<version>${jersey.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-grizzly2</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>${jetty.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${jetty.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

@@ -1,0 +1,47 @@
+<div>
+	<script id="title-template" type="text/x-handlebars-template">
+		<div class="stats">
+		    <div class="IterationChooser">
+		        <div class="iterNum"><a href="#" class="prevIter">&lt;</a><span class="num">{{_id}}</span><a href="#" class="nextIter">&gt;</a></div>
+		        <div class="iterLabel">ITERATION</div>
+		    </div>
+		</div>
+	</script>
+
+	<script id="sprints-template" type="text/x-handlebars-template">
+		<div class="DashboardStory">
+	        <div class="header">
+	          <div class="storyID red">{{weeks}}</div>
+	          <div class="nameContainer"><a class="name" href="#sprint/{{_id}}">{{name}}</a></div>
+	          <div class="LabeledCounts tasks">
+		         <div href="#" class="label">TASKS</div>
+		         <div class="counts">
+		            <div class="red count">{{#if tasks.length}}{{tasks.length}}{{else}}0{{/if}}</div>
+		         </div>
+		      </div>
+	      </div>
+       </div>
+	</script>
+
+	<script id="sprint-template" type="text/x-handlebars-template">
+		<div class="DashboardStory">
+	        <div class="header">
+	          <div class="storyID red">{{size}}</div>
+	          <div class="nameContainer"><a class="name">{{name}}</a></div>
+		      <div class=" chumps"><ul class="InitialsList"><li class="">{{developer}}</li></ul></div>
+	      </div>
+       </div>
+	</script>
+
+	<script id="create-template" type="text/x-handlebars-template">
+		<div id="create" class="DashboardStory">
+	        <div class="header">
+	          <div class="storyID red">New</div>
+	          <div class="nameContainer">
+	          	<input type="text" placeholder="name"/>
+	          	<a>create</a>
+	          </div>
+	      </div>
+       </div>
+	</script>
+</div>
