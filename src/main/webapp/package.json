@@ -1,0 +1,12 @@
+{
+  "name": "scrumboard",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "2.5.10",
+    "express-resource": "0.2.4",
+    "mongojs": "0.4.3"
+  },
+  "engines": {
+    "node": "0.6.13"
+  }
+}
