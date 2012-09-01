@@ -11,7 +11,7 @@ define(['views/SprintsView', 'views/SprintView', 'collections/Sprints', 'models/
             sprints.fetch();
         },
         sprint: function(id) {
-            var sprint = new Sprint({id: id});
+            var sprint = new Sprint({_id: id});
             var sprintView = new SprintView({model: sprint});
             sprint.fetch();
         }
