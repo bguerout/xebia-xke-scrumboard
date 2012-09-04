@@ -23,8 +23,8 @@ import static org.fest.assertions.Assertions.assertThat;
 public class BackOfficeTest {
 
     private static Jongo jongo;
-
-    private Backlog backlog;
+    private BackOffice bo;
+    private MongoCollection collection;
 
     @BeforeClass
     public static void connectToDatabase() throws Exception {
@@ -36,57 +36,49 @@ public class BackOfficeTest {
     @Before
     public void setUp() throws Exception {
 
-        MongoCollection collection = jongo.getCollection("sprints");
-
-        backlog = new Backlog(collection);
-        backlog.loadProductOwnerWishes();
+        collection = jongo.getCollection("sprints");
+        bo = new BackOffice(collection);
+        new Backlog(collection).loadProductOwnerWishes();
     }
 
     @After
     public void tearDown() throws Exception {
-        backlog.purge();
+        collection.drop();
     }
 
     @Test
     public void canFindXLTasks() throws Exception {
 
-        List<Sprint> sprints = BackOffice.findSprintsWithXLTasks();
+        List<Sprint> sprints = bo.findSprintsByTaskSize(Size.XL);
 
         assertThat(sprints).isNotNull();
         assertThat(sprints).isNotEmpty();
-        IterableAssert.assertThat(sprints).eachSatisfies(new SprintWithXLTaskCondition());
+        IterableAssert.assertThat(sprints).eachSatisfies(new Condition<Sprint>() {
+            @Override
+            public boolean matches(Sprint value) {
+                return value.hasTaskWithSize(Size.XL);
+            }
+        });
     }
 
     @Test
     public void canRemoveXLTasks() throws Exception {
 
-        List<Sprint> sprints = BackOffice.findSprintsWithXLTasks();
-        assertThat(sprints).isNotEmpty();
-        String id = sprints.get(0).getId();
+        bo.removeTasksBySize(Size.XL);
 
-        BackOffice.removeXLTasks(id);
-
-        List<Sprint> result = BackOffice.findSprintsWithXLTasks();
-        IterableAssert.assertThat(result).eachSatisfies(new SprintWithXLTaskCondition());
+        assertThat(bo.findSprintsByTaskSize(Size.XL)).isEmpty();
     }
 
     @Test
     public void canGenerateATaskReport() throws Exception {
 
-        List<String> report = BackOffice.generateTaskReport();
+        List<String> report = bo.generateTaskReport(Size.XL);
 
         assertThat(report).isNotEmpty();
         DBObject task = (DBObject)JSON.parse(report.get(0));
-        assertThat(task.get("name")).isNotNull();
-        assertThat(task.get("sprint")).isNotNull();
-        assertThat(task.get("size")).isNotNull();
-    }
-
-    private static class SprintWithXLTaskCondition extends Condition<Sprint> {
-        @Override
-        public boolean matches(Sprint value) {
-            return value.hasTaskWithSize(Size.XL);
-        }
+        assertThat(task.get("task")).isNotNull();
+        assertThat(task.get("sprint")).isEqualTo("Sprint 1 - Discover Jongo");
+        assertThat(task.get("size")).isEqualTo(Size.XL.name());
     }
 }
 

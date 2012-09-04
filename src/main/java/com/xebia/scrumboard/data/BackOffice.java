@@ -1,23 +1,32 @@
 package com.xebia.scrumboard.data;
 
+import com.google.common.collect.Lists;
 import com.mongodb.DBObject;
+import com.mongodb.WriteConcern;
+import com.xebia.scrumboard.representation.Size;
 import com.xebia.scrumboard.representation.Sprint;
+import org.jongo.MongoCollection;
+import org.jongo.ResultMapper;
 
 import java.util.List;
 
 public class BackOffice {
 
-    //Create a jongo instance
+    private final MongoCollection collection;
 
-    public static List<Sprint> findSprintsWithXLTasks() {
+    public BackOffice(MongoCollection collection) {
+        this.collection = collection;
+    }
+
+    public List<Sprint> findSprintsByTaskSize(Size size) {
         return null;
     }
 
-    public static void removeXLTasks(String sprintId) {
+    public void removeTasksBySize(Size taskSize) {
         //tips: remove tasks with update operation...
     }
 
-    public static List<String> generateTaskReport() {
+    public List<String> generateTaskReport(Size taskSize) {
         /**
          You have to create a document as follow :
          {
