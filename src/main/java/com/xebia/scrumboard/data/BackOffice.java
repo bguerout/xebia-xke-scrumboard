@@ -19,6 +19,7 @@ public class BackOffice {
     }
 
     public List<Sprint> findSprintsByTaskSize(Size size) {
+        //tips use parameter token '#'
         return null;
     }
 
@@ -28,7 +29,7 @@ public class BackOffice {
 
     public List<String> generateTaskReport(Size taskSize) {
         /**
-         You have to create a document as follow :
+         You have to create documents as follow :
          {
          task : "task name",
          size : "task size",

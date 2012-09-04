@@ -22,20 +22,19 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class BackOfficeTest {
 
-    private static Jongo jongo;
+    private static Mongo mongo;
     private BackOffice bo;
     private MongoCollection collection;
 
     @BeforeClass
     public static void connectToDatabase() throws Exception {
-        Mongo mongo = new Mongo("127.0.0.1", 27017);
-        DB db = mongo.getDB("xebia");
-        jongo = new Jongo(db);
+        mongo = new Mongo("127.0.0.1", 27017);
     }
 
     @Before
     public void setUp() throws Exception {
-
+        DB db = mongo.getDB("xebia");
+        Jongo jongo = new Jongo(db);
         collection = jongo.getCollection("sprints");
         bo = new BackOffice(collection);
         new Backlog(collection).loadProductOwnerWishes();

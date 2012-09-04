@@ -49,8 +49,4 @@ public class Backlog {
         collection.save(sprint1, WriteConcern.SAFE);
         collection.save(sprint2, WriteConcern.SAFE);
     }
-
-    public void purge() throws UnknownHostException {
-        collection.drop();
-    }
 }
