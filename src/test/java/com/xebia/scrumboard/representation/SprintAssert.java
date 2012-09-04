@@ -14,6 +14,7 @@ public class SprintAssert extends GenericAssert<SprintAssert, Sprint> {
     }
 
     public SprintAssert hasId() {
+        Assertions.assertThat(actual).isNotNull();
         Assertions.assertThat(actual.id).isNotNull();
         return this;
     }

@@ -1,10 +1,9 @@
 package com.xebia.scrumboard.representation;
 
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.bson.types.ObjectId;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 public class Sprint {
     @JsonProperty("_id")
@@ -13,6 +12,9 @@ public class Sprint {
     int weeks;
     List<Task> tasks;
 
+    /**
+     * Jackson constructor
+     */
     Sprint() {
     }
 
@@ -30,5 +32,22 @@ public class Sprint {
 
     public void setWeeks(int weeks) {
         this.weeks = weeks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public boolean hasTaskWithSize(Size size) {
+        for (Task task : tasks) {
+            if (task.getSize().equals(size)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
