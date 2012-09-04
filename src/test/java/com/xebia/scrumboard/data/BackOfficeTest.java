@@ -3,6 +3,7 @@ package com.xebia.scrumboard.data;
 import com.mongodb.DB;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
+import com.mongodb.util.JSON;
 import com.xebia.scrumboard.Backlog;
 import com.xebia.scrumboard.representation.IterableAssert;
 import com.xebia.scrumboard.representation.Size;
@@ -70,12 +71,12 @@ public class BackOfficeTest {
     }
 
     @Test
-    public void canGenerateATaskReportAsCSV() throws Exception {
+    public void canGenerateATaskReport() throws Exception {
 
-        List<DBObject> report = BackOffice.generateTaskReport();
+        List<String> report = BackOffice.generateTaskReport();
 
         assertThat(report).isNotEmpty();
-        DBObject task = report.get(0);
+        DBObject task = (DBObject)JSON.parse(report.get(0));
         assertThat(task.get("name")).isNotNull();
         assertThat(task.get("sprint")).isNotNull();
         assertThat(task.get("size")).isNotNull();

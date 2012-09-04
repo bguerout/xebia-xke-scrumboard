@@ -17,7 +17,7 @@ public class BackOffice {
         //tips: remove tasks with update operation...
     }
 
-    public static List<DBObject> generateTaskReport() {
+    public static List<String> generateTaskReport() {
         /**
          You have to create a document as follow :
          {
@@ -25,7 +25,8 @@ public class BackOffice {
          size : "task size",
          sprint : "sprint name",
          }
-         tips: use new aggregation framework and  map method...
+         and return them as JSON Strings
+         tips: use new aggregation framework and map method...
          */
         return null;
     }
