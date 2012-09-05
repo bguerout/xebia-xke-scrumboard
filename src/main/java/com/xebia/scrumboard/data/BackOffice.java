@@ -19,25 +19,25 @@ public class BackOffice {
     }
 
     public List<Sprint> findSprintsByTaskSize(Size size) {
-        Iterable<Sprint> sprints = collection.find("{tasks.size:#}", size).as(Sprint.class);
-        return Lists.newArrayList(sprints);
+        //tips use parameter token '#'
+        return null;
     }
 
     public void removeTasksBySize(Size taskSize) {
-        collection.update("{}")
-                .multi()
-                .concern(WriteConcern.SAFE)
-                .with("{$pull:{tasks:{size:#}}}", taskSize);
+        //tips: remove tasks with update operation...
     }
 
     public List<String> generateTaskReport(Size taskSize) {
-        return collection.aggregate("{ $unwind : '$tasks' }")
-                .and("{ $match:{ tasks.size:# }}", taskSize)
-                .and("{ $project : {sprint:'$name', task :'$tasks.name', size:'$tasks.size'}}")
-                .map(new ResultMapper<String>() {
-                    public String map(DBObject result) {
-                        return result.toString();
-                    }
-                });
+        /**
+         You have to create documents as follow :
+         {
+         task : "task name",
+         size : "task size",
+         sprint : "sprint name",
+         }
+         and return them as JSON Strings
+         tips: use new aggregation framework and map method...
+         */
+        return null;
     }
 }
