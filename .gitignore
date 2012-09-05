@@ -2,7 +2,6 @@
 .project
 .settings/
 target/
-node_modules/
 .DS_Store
 .idea/
 *.iml
